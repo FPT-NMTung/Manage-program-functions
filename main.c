@@ -15,10 +15,6 @@
 #include <stdlib.h>
 #include <stdio_ext.h>
 
-/*
- * 
- */
-
 //option 1: when user input = 1 (input date, month, year)
 void checkValidDateMonthYear () {
     int day, month, year;
@@ -50,21 +46,49 @@ void checkValidDateMonthYear () {
         //if wrong datatype => input again
     } while (verifyDay != 1 || verifyMonth != 1 || verifyYear != 1);
     
-    if (year < 1 || year > 9999) {
-        printf("Not valid date\n");
-    } else if (month < 1 || month > 12) {
-        
-    } else if (day < 1 || day > 31) {
-        
+    if ((year < 1 || year > 9999) || (month < 1 || month > 12)) {
+        printf("Not valid date 1\n");
+    } else {
+        if (year % 4 == 0 && month == 2 && (day < 1 || day > 29)) {
+            printf("Not valid date 2\n");
+        } else if (year % 4 != 0 && month == 2 && (day < 1 || day > 28)) {
+            printf("Not valid date 3\n");
+        } else if ((month == 4 || month == 6 || month == 9 || month == 11) && (day < 1 || day > 30)) {
+            printf("Not valid date 4\n");
+        } else if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 10 || month == 12) && (day < 1 || day > 31)) {
+            printf("Not valid date 5\n");
+        } 
     }
 }
 
+//option 2: 
+void option2 () {
+    char firstChar, secondChar;
+    
+    printf("enter first char: ");
+    scanf("%c", &firstChar);
+    __fpurge(stdin);
+    
+    printf("enter second char: ");
+    scanf("%c", &secondChar);
+    __fpurge(stdin);
+    
+    if (firstChar < secondChar) {
+        int temp = firstChar;
+        firstChar = secondChar;
+        secondChar = temp;
+    }
+    
+    for (int i = firstChar; i >= secondChar; i--) {
+        printf("%c: %d\n", i, i);
+    }
+}
 
 //function 1:Display menu and ask user to select the option
 void displayMenu (int *choice) {
     int verifyInput;
-    printf("\nMENU\n");
-    printf("------------------------------\n\n");
+    printf("             MENU\n");
+    printf("------------------------------\n");
     
     printf("1 - Processing date data\n");
     printf("2 - Character data\n");
@@ -96,7 +120,7 @@ void runFunctionWithChoice (int choice) {
             checkValidDateMonthYear();
             break;
         case 2:
-            printf("2\n");
+            option2();
             break;
     }
 }
