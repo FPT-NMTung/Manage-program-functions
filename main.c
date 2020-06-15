@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdio_ext.h>
+#include <string.h>
 
 //option 1: when user input = 1 (input date, month, year)
 void checkValidDateMonthYear () {
@@ -63,15 +64,22 @@ void checkValidDateMonthYear () {
 
 //option 2: 
 void option2 () {
-    char firstChar, secondChar;
+    char *character;
+    character = (char *) malloc (100 * sizeof(char));
     
-    printf("enter first char: ");
-    scanf("%c", &firstChar);
-    __fpurge(stdin);
+    do {
+        gets(character);
+        __fpurge(stdin);
+        
+        if (strlen(character) != 2) {
+            printf("your input need 2 character\n");
+        }
+    } while (strlen(character) != 2);
     
-    printf("enter second char: ");
-    scanf("%c", &secondChar);
-    __fpurge(stdin);
+    character = realloc(character, 2 * sizeof(char));
+    printf("output: %s\n", character);    
+    
+    char firstChar = character[0], secondChar = character[1];
     
     if (firstChar < secondChar) {
         int temp = firstChar;
@@ -132,7 +140,6 @@ int main() {
     
     do {
         displayMenu(&choice);
-        printf("%d\n", choice);
 
         runFunctionWithChoice(choice);
     } while (choice != 3);
