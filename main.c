@@ -65,7 +65,7 @@ void checkValidDateMonthYear () {
 //option 2: 
 void option2 () {
     char *character;
-    character = (char *) malloc (100 * sizeof(char));
+    character = (char *) malloc (0 * sizeof(char));
     
     do {
         gets(character);
@@ -145,4 +145,3 @@ int main() {
     } while (choice != 3);
     
 }
-
